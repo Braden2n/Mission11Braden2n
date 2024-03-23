@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -15,6 +16,10 @@ public class PaginationTagHelper(IUrlHelperFactory factory) : TagHelper
     public ViewContext? ViewContext { get; set; }
     public string? PageAction { get; set; }
     public Pagination? Pagination { get; set; }
+    public bool PageClassesEnabled { get; set; } = false;
+    public string PageClass { get; set; } = string.Empty;
+    public string PageClassNormal { get; set; } = string.Empty;
+    public string PageClassSelected { get; set; } = string.Empty;
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {
@@ -31,12 +36,13 @@ public class PaginationTagHelper(IUrlHelperFactory factory) : TagHelper
                         ["href"] = urlHelper.Action(PageAction, new { pageNum = i })
                     }
                 };
+                if (PageClassesEnabled)
+                {
+                    tag.AddCssClass(PageClass);
+                    tag.AddCssClass(i == Pagination.CurrentPage ? PageClassSelected : PageClassNormal);
+                }
                 tag.InnerHtml.Append(i.ToString());
                 result.InnerHtml.AppendHtml(tag);
-                if (i != Pagination.TotalPages)
-                {
-                    result.InnerHtml.Append(", ");
-                }
             }
             output.Content.AppendHtml(result.InnerHtml);
         }

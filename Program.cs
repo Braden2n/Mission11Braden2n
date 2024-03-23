@@ -26,8 +26,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute("pagination","Books/{pageNum}",new {Controller="Home", action="Index"});
+app.MapDefaultControllerRoute();
 
 app.Run();

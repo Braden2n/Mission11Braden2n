@@ -1,0 +1,47 @@
+@model Book
+
+<div class="card m-1 p-1">
+    <h2>
+        <div class="row">
+            <div class="col text-start">
+                <span class="badge rounded-pill bg-primary float-start text-black">
+                    @Model.Title
+                </span>
+            </div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-success text-white">
+                    @Model.Price.ToString("C")
+                </span>
+            </div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-warning text-white">
+                    @Model.Classification
+                </span>
+            </div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-danger text-white">
+                    @Model.Author
+                </span>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col text-start"></div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-info text-white">
+                    @Model.PageCount.ToString("N0") Pages
+                </span>
+            </div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-dark text-white">
+                    ISBN: @Model.Isbn
+                </span>
+            </div>
+            <div class="col-auto text-end">
+                <span class="badge rounded-pill bg-secondary text-white">
+                    Pub: @Model.Publisher
+                </span>
+            </div>
+        </div>
+    </h2>
+</div>
